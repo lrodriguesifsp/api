@@ -1,6 +1,17 @@
-### Create User
+### Localhost
 
 POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "joao.silva@email.com",
+  "password": "123456"
+}
+
+### Railway
+
+POST https://api-production-dcaa.up.railway.app/users
 Content-Type: application/json
 
 {
