@@ -1,21 +1,20 @@
-var express = require('express');
-var router = express.Router();
-const db = require('../config/database');
+const express = require('express')
+const router = express.Router()
+const db = require('../config/database')
 
 router.post('/', async function (req, res, next) {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body
 
-    const [result] = await db.execute(
-      'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-      [name, email, password]
-    );
+    const sql = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)'
+    const values = [name, email, password]
+    const [rows] = await db.execute(sql, values)
 
-    res.status(201).json({ userId: result.insertId });
-
+    console.log(rows)
+    res.status(201).json({ insertId: rows.insertId });
   } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
+    console.error(error)
+    res.status(500).json(error)
   }
 });
 
